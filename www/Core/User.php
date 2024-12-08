@@ -5,7 +5,10 @@ class User
 
     public function isLogged(): bool
     {
-        return false;
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+        return isset($_SESSION['user']);
     }
 
     public function getRoles():array
@@ -15,6 +18,8 @@ class User
 
     public function logout():void
     {
+        session_start();
+        session_unset();
         session_destroy();
     }
 

@@ -1,5 +1,9 @@
 <?php
 
+error_reporting(E_ALL); // Affiche toutes les erreurs et avertissements
+ini_set('display_errors', '1'); // Les erreurs sont affichées sur la page
+ini_set('display_startup_errors', '1'); // Affiche les erreurs au démarrage
+
 spl_autoload_register("myAutoloader");
 function myAutoloader(string $class):void
 {

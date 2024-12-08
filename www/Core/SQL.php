@@ -24,33 +24,20 @@ class SQL
        return $queryPrepared->fetch();
     }
 
-    public function login(string $email, string $pwd) 
+    public function insert(string $table, array $data): bool
     {
         
-        $queryPrepared = $this->pdo->prepare("SELECT * FROM user WHERE email=:email AND password=:password");
-        $queryPrepared->execute([
-            "email"=>$email,
-            "password"=>$pwd
-        ]);
-        $user = $queryPrepared->fetch();
-        if($user){
-            $_SESSION["user"] = $user;
-            header("Location:/");
-        }else{
-            echo "Erreur de connexion";
-        }
+        $columns = implode(", ", array_keys($data));
+        $placeholders = ":" . implode(", :", array_keys($data));
+        $queryPrepared = $this->pdo->prepare("INSERT INTO $table ($columns) VALUES ($placeholders)");
+        return $queryPrepared->execute($data);
     }
 
-    public function register(string $firstname, string $lastname, string $email, string $password)
+    public function getOneByEmail(string $table, string $email): ?array
     {
-        $queryPrepared = $this->pdo->prepare("INSERT INTO user (firstname,lastname,email,password) VALUES (:firstname,:lastname,:email,:password)");
-        $queryPrepared->execute([
-            "firstname"=>$firstname,
-            "lastname"=>$lastname,
-            "email"=>$email,
-            "password"=>$password
-        ]);
-        header("Location:/");
+        $queryPrepared = $this->pdo->prepare("SELECT * FROM $table WHERE email = :email");
+        $queryPrepared->execute(['email' => $email]);
+        return $queryPrepared->fetch(\PDO::FETCH_ASSOC) ?: null;
     }
 
 }
