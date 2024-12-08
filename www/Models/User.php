@@ -20,11 +20,19 @@ class User
 
     public function setFirstname(string $firstname): void
     {
-        $this->firstname = $firstname;
+        $firstname = ucfirst(trim($firstname));
+        if (!isset($firstname) || $firstname == "") {
+            throw new \InvalidArgumentException("The firstname is required");
+        }
+        $this->firstname = ucfirst($firstname);
     }
 
     public function setLastname(string $lastname): void
     {
+        $lastname = strtoupper(trim($lastname));
+        if (!isset($lastname) || $lastname == "") {
+            throw new \InvalidArgumentException("The lastname is required");
+        }
         $this->lastname = $lastname;
     }
 
@@ -38,6 +46,9 @@ class User
 
     public function setPassword(string $password): void
     {
+        if (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\w\s]).{8,20}$/', $password)) {
+            throw new \InvalidArgumentException("Veuillez entrer un mot de passe valide : <ul><li>Au moins une lettre minuscule</li><li>Au moins une lettre majuscule</li><li>Au moins un chiffre</li><li>Au moins un caractère spécial (non alphanumérique et non un espace)</li><li>Le mot de passe doit être compris entre 8 et 20 caractères</li></ul>");
+        }
         $this->password = password_hash($password, PASSWORD_BCRYPT);
     }
 
