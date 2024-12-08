@@ -19,7 +19,7 @@ services:
       MYSQL_USER: esgi
       MYSQL_PASSWORD: esgipwd
     ports:
-      - "3306:3306"
+      - "3307:3306"
     volumes:
       - mariadb_data:/var/lib/mysql
 
@@ -32,7 +32,7 @@ services:
       PMA_USER: esgi
       PMA_PASSWORD: esgipwd
     ports:
-      - "8080:80"
+      - "8081:80"
 
 volumes:
   mariadb_data:

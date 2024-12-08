@@ -1,12 +1,12 @@
-/user/add:
+/register:
   controller: "User"
   action: "register"
 
-/se-connecter:
+/login:
   controller: "User"
   action: "login"
 
-/se-deconnecter:
+/logout:
   controller: "User"
   action: "logout"
 

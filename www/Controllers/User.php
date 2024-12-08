@@ -1,6 +1,7 @@
 <?php
 namespace App\Controllers;
 
+use App\Core\SQL;
 use App\Core\User as U;
 use App\Core\View;
 
@@ -15,9 +16,26 @@ class User
 
     public function login(): void
     {
-        echo "Se connecter";
+        $view = new View("User/login.php", "back.php");
     }
 
+    public function loginPost(): void
+    {
+        $email = $_POST["email"];
+        $password = $_POST["password"];
+        $sql = new SQL();
+        $sql->login($email, $password);
+    }
+
+    public function registerPost(): void
+    {
+        $firstname = $_POST["firstname"];
+        $lastname = $_POST["lastname"];
+        $email = $_POST["email"];
+        $password = $_POST["password"];
+        $sql = new SQL();
+        $sql->register($firstname, $lastname, $email, $password);
+    }
 
     public function logout(): void
     {
