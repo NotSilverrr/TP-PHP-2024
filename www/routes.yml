@@ -1,0 +1,19 @@
+/register:
+  controller: "User"
+  action: "register"
+
+/login:
+  controller: "User"
+  action: "login"
+
+/logout:
+  controller: "User"
+  action: "logout"
+
+/backoffice:
+  controller: "Backoffice"
+  action: "dashboard"
+
+/page:
+  controller: "page"
+  action: "show"
