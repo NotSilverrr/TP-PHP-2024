@@ -12,7 +12,6 @@ class User
     public function register(): void
     {
         $view = new View("User/register.php", "back.php");
-        // $view->addData('error', null);
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $firstname = $_POST['firstname'] ?? '';
             $lastname = $_POST['lastname'] ?? '';

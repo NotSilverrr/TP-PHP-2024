@@ -40,8 +40,6 @@ header {
     nav a:hover {
         text-decoration: underline;
     }
-
-    nav
 }
 
 @media screen and (min-width: 900px) {

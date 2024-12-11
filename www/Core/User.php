@@ -23,18 +23,4 @@ class User
         session_destroy();
     }
 
-    public function login(): void
-    {
-        $email = $_POST["email"];
-        $password = $_POST["password"];
-    }
-
-    public function register(): void
-    {
-        $firstname = $_POST["firstname"];
-        $lastname = $_POST["lastname"];
-        $email = $_POST["email"];
-        $password = $_POST["password"];
-    }
-
 }
