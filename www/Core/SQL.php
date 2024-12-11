@@ -26,7 +26,6 @@ class SQL
 
     public function insert(string $table, array $data): bool
     {
-        
         $columns = implode(", ", array_keys($data));
         $placeholders = ":" . implode(", :", array_keys($data));
         $queryPrepared = $this->pdo->prepare("INSERT INTO $table ($columns) VALUES ($placeholders)");

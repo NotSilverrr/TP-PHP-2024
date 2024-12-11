@@ -22,6 +22,10 @@ class User
             try {
                 $user = new MUser($firstname, $lastname, $email, $password);
                 $sql = new SQL();
+                if ($sql->getOneByEmail("user",$email)) {
+                    $view->addData('error', "User already registered");
+                    exit;
+                }
                 $sql->insert('user', [
                     'firstname' => $user->getFirstname(),
                     'lastname' => $user->getLastname(),
@@ -40,7 +44,7 @@ class User
     {
         $view = new View("User/login.php", "back.php");
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $email = strtolower($_POST['email']);
+            $email = strtolower(trim($_POST['email']));
             $password = $_POST['password'];
             try {
                 $sql = new SQL;
