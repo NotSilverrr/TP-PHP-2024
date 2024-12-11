@@ -45,8 +45,6 @@ class User
             try {
                 $sql = new SQL;
                 $user = $sql->getOneByEmail('user', $email);
-
-
                 if (!$user || !password_verify($password, $user["password"])){
                     throw new \Exception("Email ou mot de passe incorrect");
                 }
