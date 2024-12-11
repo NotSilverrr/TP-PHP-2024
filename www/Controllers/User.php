@@ -11,7 +11,7 @@ class User
 
     public function register(): void
     {
-        $view = new View("User/register.php", "front.php");
+        $view = new View("User/register.php", "back.php");
         // $view->addData('error', null);
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $firstname = $_POST['firstname'] ?? '';
@@ -38,7 +38,7 @@ class User
 
     public function login(): void
     {
-        $view = new View("User/login.php", "front.php");
+        $view = new View("User/login.php", "back.php");
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $email = strtolower($_POST['email']);
             $password = $_POST['password'];
