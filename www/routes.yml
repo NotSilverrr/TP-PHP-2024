@@ -1,3 +1,7 @@
+/:
+  controller: "Front"
+  action: "homepage"
+
 /register:
   controller: "User"
   action: "register"

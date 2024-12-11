@@ -6,8 +6,12 @@
         <meta name="description" content="<?php echo $description??"Ceci est la description de la page";?>">
     </head>
     <body>
+        <header></header>
+        <main>
         <h1>Template du front</h1>
         <?php include $this->view;?>
+        </main>
+        <footer></footer>
     </body>
 </html>
 
