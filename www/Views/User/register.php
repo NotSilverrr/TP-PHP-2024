@@ -7,6 +7,8 @@
     <input type="text" name="lastname" id="lastname">
     <label for="email">Email</label>
     <input type="text" name="email" id="email">
+    <label for="email">Country</label>
+    <input type="text" name="country" id="country">
     <label for="password">Password</label>
     <input type="password" name="password" id="password">
     <input type="submit" value="Register">

@@ -6,13 +6,16 @@ class User
     private string $firstname;
     private string $lastname;
     private string $email;
+    private string $country;
     private string $password;
+    
 
-    public function __construct(string $firstname, string $lastname, string $email, string $password)
+    public function __construct(string $firstname, string $lastname, string $email, string $country, string $password)
     {
         $this->setFirstname($firstname);
         $this->setLastname($lastname);
         $this->setEmail($email);
+        $this->setCountry($country);
         $this->setPassword($password);
     }
 
@@ -20,10 +23,21 @@ class User
 
     public function setFirstname(string $firstname): void
     {
-        $firstname = ucfirst(trim($firstname));
+        $firstname = ucwords(trim($firstname));
+
         if (!isset($firstname) || $firstname == "") {
             throw new \InvalidArgumentException("The firstname is required");
         }
+
+        if (strlen($firstname) > 30 || strlen($firstname) < 2) {
+            throw new \InvalidArgumentException("The firstname must be shorter than 30 characters and longer than 1 character");
+        }
+        
+        if (!preg_match("/^[A-ZÀ-ÖØ-Ýa-zà-öø-ÿ'’-]{2,30}$/", $firstname)) {
+            throw new \InvalidArgumentException("The firstname mustn't contain certain characters");
+        }
+
+
         $this->firstname = ucfirst($firstname);
     }
 
@@ -32,6 +46,14 @@ class User
         $lastname = strtoupper(trim($lastname));
         if (!isset($lastname) || $lastname == "") {
             throw new \InvalidArgumentException("The lastname is required");
+        }
+
+        if (strlen($lastname) > 60 || strlen($lastname) < 2) {
+            throw new \InvalidArgumentException("The lastname must be shorter than 30 characters and longer than 1 character");
+        }
+        
+        if (!preg_match("/^[A-ZÀ-ÖØ-Ýa-zà-öø-ÿ'’\- ]{2,60}$/", $lastname)) {
+            throw new \InvalidArgumentException("The lastname mustn't contain certain characters");
         }
         $this->lastname = $lastname;
     }
@@ -43,6 +65,16 @@ class User
             throw new \InvalidArgumentException("Invalid email format");
         }
         $this->email = $email;
+    }
+
+    public function setCountry(string $country): void
+    {
+        $country = ucwords(trim($country));
+        if (strlen($country) > 50 || strlen($country) < 2) {
+            throw new \InvalidArgumentException("The country must be shorter than 50 characters and longer than 1 character");
+        }
+
+        $this->country = $country;
     }
 
     public function setPassword(string $password): void
@@ -69,6 +101,11 @@ class User
     public function getEmail(): string
     {
         return $this->email;
+    }
+
+    public function getCountry(): string
+    {
+        return $this->country;
     }
 
     public function getPassword(): string

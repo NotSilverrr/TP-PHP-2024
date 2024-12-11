@@ -17,10 +17,11 @@ class User
             $firstname = $_POST['firstname'] ?? '';
             $lastname = $_POST['lastname'] ?? '';
             $email = $_POST['email'] ?? '';
+            $country = $_POST['country'] ?? '';
             $password = $_POST['password'] ?? '';
 
             try {
-                $user = new MUser($firstname, $lastname, $email, $password);
+                $user = new MUser($firstname, $lastname, $email, $country, $password);
                 $sql = new SQL();
                 if ($sql->getOneByEmail("user",$email)) {
                     $view->addData('error', "User already registered");
@@ -30,6 +31,7 @@ class User
                     'firstname' => $user->getFirstname(),
                     'lastname' => $user->getLastname(),
                     'email' => $user->getEmail(),
+                    'country' => $user->getCountry(),
                     'password' => $user->getPassword()
                 ]);
                 header('Location: /login');
