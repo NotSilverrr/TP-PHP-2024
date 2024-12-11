@@ -40,7 +40,7 @@ class User
     {
         $view = new View("User/login.php", "back.php");
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $email = $_POST['email'];
+            $email = strtolower($_POST['email']);
             $password = $_POST['password'];
             try {
                 $sql = new SQL;

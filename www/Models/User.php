@@ -38,6 +38,7 @@ class User
 
     public function setEmail(string $email): void
     {
+        $email = strtolower(trim($email));
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             throw new \InvalidArgumentException("Invalid email format");
         }
